@@ -16,6 +16,7 @@ class ProductPage(BasePage):
         self.should_be_price()
         self.should_be_add_button()
         self.should_product_added()
+        self.solve_quiz_and_get_code()
         self.should_appear_successful_message()
         self.should_appear_total_alert()
 
@@ -52,3 +53,25 @@ class ProductPage(BasePage):
     def should_disappear_success_message(self):
         assert self.is_disappeared(*ProductPageLocators.SUCCESSFUL_ALERT), \
             "Success message is presented, but should not be"
+
+    def solve_quiz_and_get_code(self):
+        alert = self.browser.switch_to.alert
+        x = alert.text.split(" ")[2]
+        answer = str(math.log(abs((12 * math.sin(float(x))))))
+        alert.send_keys(answer)
+        alert.accept()
+        try:
+            alert = self.browser.switch_to.alert
+            alert_text = alert.text
+            print(f"Your code: {alert_text}")
+            alert.accept()
+        except NoAlertPresentException:
+            print("No second alert presented")
+
+    def should_be_added_to_page_without_quiz(self):
+        self.should_be_name()
+        self.should_be_price()
+        self.should_be_add_button()
+        self.should_product_added()
+        self.should_appear_successful_message()
+        self.should_appear_total_alert()

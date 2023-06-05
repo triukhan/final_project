@@ -1,5 +1,5 @@
 from .base_page import BasePage
-from .locators import LoginPageLocators, RegisterPageLocators
+from .locators import LoginPageLocators
 
 
 class LoginPage(BasePage):
@@ -29,5 +29,5 @@ class LoginPage(BasePage):
         self.browser.find_element(*LoginPageLocators.UP_CONFIRM_PASSWORD_FIELD).send_keys(password)
         self.click_element(*LoginPageLocators.UP_BUTTON)
 
-    def user_should_be_logged_in(self):
-        assert self.is_element_present(*LoginPageLocators.USER_ICON), 'User is logged out'
+    # def user_should_be_logged_in(self):
+    #     assert self.is_element_present(*LoginPageLocators.USER_ICON), 'User is logged out'
