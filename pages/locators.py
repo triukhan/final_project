@@ -15,6 +15,8 @@ class LoginPageLocators:
     UP_CONFIRM_PASSWORD_FIELD = (By.NAME, "registration-password2")
     UP_BUTTON = (By.NAME, "registration_submit")
 
+    USER_ICON = (By.CSS_SELECTOR, 'i.icon-user')
+
 
 class ProductPageLocators:
     ADD_TO_BASKET_BUTTON = (By.CSS_SELECTOR, '[value="Add to basket"]')
@@ -33,3 +35,10 @@ class BasePageLocators():
 
 class BasketPageLocators():
     BASKET_EMPTY_TEXT = (By.CSS_SELECTOR, '#content_inner p')
+
+
+class RegisterPageLocators():
+    EMAIL_FIELD = (By.NAME, 'registration-email')
+    PASSWORD_FIELD = (By.NAME, 'registration-password1')
+    CONFIRM_PASSWORD_FIELD = (By.NAME, 'registration-password2')
+    REGISTER_BUTTON = (By.NAME, 'registration_submit')

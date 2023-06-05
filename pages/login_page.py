@@ -1,5 +1,5 @@
 from .base_page import BasePage
-from .locators import LoginPageLocators
+from .locators import LoginPageLocators, RegisterPageLocators
 
 
 class LoginPage(BasePage):
@@ -18,6 +18,16 @@ class LoginPage(BasePage):
 
     def should_be_register_form(self):
         assert self.is_element_present(*LoginPageLocators.UP_EMAIL_FIELD), "Email field is absent"
-        assert self.is_element_present(*LoginPageLocators.IN_PASSWORD_FIELD), "Password field is absent"
+        assert self.is_element_present(*LoginPageLocators.UP_PASSWORD_FIELD), "Password field is absent"
         assert self.is_element_present(*LoginPageLocators.UP_CONFIRM_PASSWORD_FIELD), "Confirm password field is absent"
         assert self.is_element_present(*LoginPageLocators.UP_BUTTON), "Button is absent"
+
+    def register_new_user(self, email, password):
+        self.should_be_register_form()
+        self.browser.find_element(*LoginPageLocators.UP_EMAIL_FIELD).send_keys(email)
+        self.browser.find_element(*LoginPageLocators.UP_PASSWORD_FIELD).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.UP_CONFIRM_PASSWORD_FIELD).send_keys(password)
+        self.click_element(*LoginPageLocators.UP_BUTTON)
+
+    def user_should_be_logged_in(self):
+        assert self.is_element_present(*LoginPageLocators.USER_ICON), 'User is logged out'
